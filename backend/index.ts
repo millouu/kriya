@@ -9,7 +9,7 @@ app.use(cors());
 app.post("/api/enroll", (req, res) => {
   const { name, dob, mobile, selectedBatch, gender } = req.body;
 
-  // Validation logic
+  // Validation logic- also present on the frontend, this will prevent any invalid data from being stored in the database
   const nameRegex = /^[a-zA-Z\s]+$/;
   const validName = nameRegex.test(name);
   const currentDate = new Date();
@@ -21,7 +21,6 @@ app.post("/api/enroll", (req, res) => {
     return res.status(400).json({ error: "Invalid form data. Please check your entries." });
   }
 
-  // If validation passes, send a success response with the submitted data
   const enrolledUserData = {
     name,
     dob,

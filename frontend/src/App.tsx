@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Modal from "react-modal"; // Import react-modal
+import Modal from "react-modal"; 
 
 Modal.setAppElement("#root");
 
@@ -15,9 +15,7 @@ const App: React.FC = () => {
     setIsOpen(false);
   };
 
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [userData, setUserData] = useState<any>(null); // State to hold the user data
+  const [userData, setUserData] = useState<any>(null); 
 
   const [errors, setErrors] = useState({
     name: "",
@@ -38,7 +36,7 @@ const App: React.FC = () => {
       gender,
     };
 
-    // Frontend validation logic (similar to your existing code)
+    //validation on frontend
     const nameRegex = /^[a-zA-Z\s]+$/;
     const validName = nameRegex.test(name);
     const currentDate = new Date();
@@ -61,7 +59,6 @@ const App: React.FC = () => {
 
     if (hasErrors) {
       setErrors(newErrors);
-      setSuccessMessage("");
     } else {
       // Continue if frontend validation passes
       try {
@@ -71,19 +68,15 @@ const App: React.FC = () => {
         );
 
         if (response.status === 200) {
-          setSuccessMessage(response.data.message);
-          setUserData(response.data.userData); // Set the user data received from the server
+          setUserData(response.data.userData); 
           setIsOpen(true);
           console.log("Enrolled User Data:", response.data.userData);
-          setFormSubmitted(true);
           setTimeout(() => {
             setName("");
             setDob("");
             setMobile("");
             setSelectedBatch("");
             setGender("");
-            setSuccessMessage("");
-            setFormSubmitted(false);
           }, 1000);
           setErrors({
             name: "",
@@ -228,7 +221,6 @@ const App: React.FC = () => {
         <p className='text-lg'>Mobile Number: {userData?.mobile}</p>
         <p className='text-lg'>Selected Batch: {userData?.selectedBatch}</p>
 
-        {/* Display any success message or additional information */}
         <button
           className='bg-black text-white border-black border-2 p-2 mt-5'
           onClick={closeModal}>
